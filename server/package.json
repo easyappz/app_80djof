@@ -1,7 +1,7 @@
 {
   "name": "calculator-api",
   "version": "1.0.0",
-  "description": "API for calculator application",
+  "description": "A Node.js Express application for supporting a calculator app",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -10,15 +10,15 @@
   "keywords": [
     "express",
     "node",
-    "calculator",
-    "api"
+    "api",
+    "calculator"
   ],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.20.3",
     "express": "^4.21.0",
-    "mongoose": "^8.14.1",
-    "body-parser": "^1.20.3"
+    "mongoose": "^8.14.1"
   },
   "devDependencies": {
     "nodemon": "^3.1.7"

@@ -2,7 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 
-// Basic hello endpoint for testing
+// Basic endpoint for testing API connectivity
 router.get('/hello', (req, res) => {
   res.status(200).json({ message: 'Hello from API!' });
 });
@@ -15,7 +15,7 @@ router.get('/status', (req, res) => {
   });
 });
 
-// Future endpoint for calculator operations
+// Placeholder endpoint for future calculator operations
 router.post('/calculate', (req, res) => {
   const { operation, numbers } = req.body;
   
@@ -23,12 +23,29 @@ router.post('/calculate', (req, res) => {
     return res.status(400).json({ error: 'Operation and numbers are required' });
   }
   
-  // Placeholder for future server-side calculations or logging
+  // Currently, just acknowledge receipt; logic will be implemented later
   res.status(200).json({ 
     message: 'Calculation request received',
     operation,
     numbers,
-    result: 'To be implemented on server side'
+    result: null // Placeholder for future implementation
+  });
+});
+
+// Placeholder endpoint for logging operations (for future use)
+router.post('/log', (req, res) => {
+  const { operation, numbers, result } = req.body;
+  
+  if (!operation || !numbers || result === undefined) {
+    return res.status(400).json({ error: 'Operation, numbers, and result are required for logging' });
+  }
+  
+  // Currently, just acknowledge receipt; database logging will be implemented later
+  res.status(200).json({ 
+    message: 'Log entry received',
+    operation,
+    numbers,
+    result
   });
 });
 

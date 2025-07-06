@@ -1,13 +1,15 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 
 const apiRoutes = require('./apiRoutes');
 
-// Initialize express app
+// Initialize Express app
 const app = express();
 
 // Middleware to parse JSON bodies
-app.use(express.json());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Mount API routes
 app.use('/api', apiRoutes);
