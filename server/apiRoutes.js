@@ -1,20 +1,34 @@
 const express = require('express');
 
-// Для работы с базой данных
-const mongoDb = global.mongoDb;
-
 const router = express.Router();
 
-// GET /api/hello
+// Basic hello endpoint for testing
 router.get('/hello', (req, res) => {
-  res.json({ message: 'Hello from API!' });
+  res.status(200).json({ message: 'Hello from API!' });
 });
 
-// GET /api/status
+// Status endpoint to check server health
 router.get('/status', (req, res) => {
-  res.json({ 
+  res.status(200).json({ 
     status: 'ok',
     timestamp: new Date().toISOString()
+  });
+});
+
+// Future endpoint for calculator operations
+router.post('/calculate', (req, res) => {
+  const { operation, numbers } = req.body;
+  
+  if (!operation || !numbers) {
+    return res.status(400).json({ error: 'Operation and numbers are required' });
+  }
+  
+  // Placeholder for future server-side calculations or logging
+  res.status(200).json({ 
+    message: 'Calculation request received',
+    operation,
+    numbers,
+    result: 'To be implemented on server side'
   });
 });
 
