@@ -8,12 +8,31 @@ function App() {
   const [operation, setOperation] = useState(null);
   const [waitingForSecondOperand, setWaitingForSecondOperand] = useState(false);
 
-  const handleNumberClick = (value) => {
-    if (display === '0' && value !== '.') {
-      setDisplay(value);
-    } else {
-      setDisplay(display + value);
+  const formatDisplay = (value) => {
+    if (value === 'Error' || value === 'Infinity') return 'Error';
+    const num = parseFloat(value);
+    if (Math.abs(num) > 999999999) {
+      return num.toExponential(5);
     }
+    if (Math.abs(num) < 0.0000001 && num !== 0) {
+      return num.toExponential(5);
+    }
+    if (Number.isInteger(num)) {
+      return num.toString();
+    }
+    return num.toFixed(8).replace(/\.0+$/, '').replace(/0+$/, '');
+  };
+
+  const handleNumberClick = (value) => {
+    let newDisplay = display;
+    if (display === '0' && value !== '.') {
+      newDisplay = value;
+    } else if (value === '.' && display.includes('.')) {
+      return;
+    } else {
+      newDisplay = display + value;
+    }
+    setDisplay(newDisplay);
     setWaitingForSecondOperand(false);
   };
 
@@ -38,12 +57,15 @@ function App() {
     } else if (operation === '÷') {
       if (currentValue === 0) {
         setDisplay('Error');
+        setPreviousValue(null);
+        setOperation(null);
+        setWaitingForSecondOperand(false);
         return;
       }
       result = previousValue / currentValue;
     }
 
-    setDisplay(result.toString());
+    setDisplay(formatDisplay(result.toString()));
     setPreviousValue(null);
     setOperation(null);
     setWaitingForSecondOperand(false);
@@ -58,13 +80,15 @@ function App() {
 
   const handleToggleSignClick = () => {
     if (display !== '0') {
-      setDisplay((parseFloat(display) * -1).toString());
+      const newValue = (parseFloat(display) * -1).toString();
+      setDisplay(formatDisplay(newValue));
     }
   };
 
   const handlePercentClick = () => {
     if (display !== '0') {
-      setDisplay((parseFloat(display) / 100).toString());
+      const newValue = (parseFloat(display) / 100).toString();
+      setDisplay(formatDisplay(newValue));
     }
   };
 
