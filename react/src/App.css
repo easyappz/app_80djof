@@ -1,6 +1,6 @@
 /* Calculator Styles */
 .calculator {
-  background-color: #000000;
+  background-color: black;
   border-radius: 40px;
   max-width: 350px;
   margin: 40px auto;
@@ -12,37 +12,34 @@
   height: 100%;
   min-height: 600px;
   overflow: hidden;
-  user-select: none;
 }
 
 .display {
   color: white;
   font-size: 3.5em;
+  font-weight: 300;
   text-align: right;
-  padding: 20px 25px;
+  padding: 20px;
   margin-bottom: 20px;
   overflow: hidden;
   text-overflow: ellipsis;
   direction: rtl;
   font-family: 'Arial', sans-serif;
-  font-weight: 300;
-  flex: 0 0 auto;
 }
 
 .buttons {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
-  padding: 0 10px;
-  flex: 1;
+  padding: 10px;
 }
 
 .button {
-  background-color: #a5a5a5;
+  background-color: #333333;
   border: none;
   border-radius: 50%;
-  color: black;
-  font-size: 1.4em;
+  color: white;
+  font-size: 1.5em;
   height: 70px;
   width: 70px;
   display: flex;
@@ -51,20 +48,21 @@
   cursor: pointer;
   transition: transform 0.1s ease, background-color 0.2s ease;
   margin: 0 auto;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2),
-              inset 0 -1px 3px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3),
+              inset 0 -3px 5px rgba(0, 0, 0, 0.2);
 }
 
 .button:active {
   transform: scale(0.95);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3),
-              inset 0 -1px 3px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3),
+              inset 0 -1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .button.function {
   background-color: #a5a5a5;
   color: black;
-  font-weight: 500;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2),
+              inset 0 -3px 5px rgba(255, 255, 255, 0.2);
 }
 
 .button.function:active {
@@ -74,8 +72,8 @@
 .button.operation {
   background-color: #ff9500;
   color: white;
-  font-size: 1.8em;
-  font-weight: 400;
+  box-shadow: 0 3px 10px rgba(255, 149, 0, 0.4),
+              inset 0 -3px 5px rgba(255, 149, 0, 0.3);
 }
 
 .button.operation:active {
@@ -89,8 +87,8 @@
   border-radius: 50%;
   height: 70px;
   width: 70px;
-  font-size: 1.8em;
-  font-weight: 400;
+  box-shadow: 0 3px 10px rgba(255, 149, 0, 0.4),
+              inset 0 -3px 5px rgba(255, 149, 0, 0.3);
 }
 
 .button.equals:active {
@@ -104,8 +102,8 @@
   height: 70px;
   background-color: #333333;
   color: white;
-  justify-content: flex-start;
-  padding-left: 25px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3),
+              inset 0 -3px 5px rgba(0, 0, 0, 0.2);
 }
 
 .button.zero:active {
@@ -115,24 +113,19 @@
 .button:not(.function, .operation, .equals, .zero) {
   background-color: #333333;
   color: white;
-  font-weight: 500;
 }
 
 .button:not(.function, .operation, .equals, .zero):active {
   background-color: #2a2a2a;
 }
 
-.button:hover {
-  opacity: 0.9;
-}
-
 /* Responsive Design */
 @media (max-width: 480px) {
   .calculator {
-    margin: 20px;
-    padding: 15px;
-    min-height: calc(100vh - 40px);
-    border-radius: 30px;
+    margin: 10px;
+    padding: 10px;
+    min-height: calc(100vh - 20px);
+    border-radius: 20px;
   }
 
   .button {
@@ -145,21 +138,10 @@
     width: 130px;
     height: 60px;
     border-radius: 30px;
-    padding-left: 20px;
-  }
-
-  .button.operation,
-  .button.equals {
-    font-size: 1.5em;
   }
 
   .display {
-    font-size: 2.8em;
-    padding: 15px 20px;
-  }
-
-  .buttons {
-    gap: 8px;
-    padding: 0 5px;
+    font-size: 2.5em;
+    padding: 10px;
   }
 }

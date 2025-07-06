@@ -8,31 +8,24 @@ function App() {
   const [operation, setOperation] = useState(null);
   const [waitingForSecondOperand, setWaitingForSecondOperand] = useState(false);
 
+  // Format large numbers to exponential form or truncate if necessary
   const formatDisplay = (value) => {
-    if (value === 'Error' || value === 'Infinity') return 'Error';
+    if (value === 'Error') return value;
     const num = parseFloat(value);
-    if (Math.abs(num) > 999999999) {
+    if (Math.abs(num) >= 1e9 || (Math.abs(num) < 1e-6 && num !== 0)) {
       return num.toExponential(5);
     }
-    if (Math.abs(num) < 0.0000001 && num !== 0) {
-      return num.toExponential(5);
-    }
-    if (Number.isInteger(num)) {
-      return num.toString();
-    }
-    return num.toFixed(8).replace(/\.0+$/, '').replace(/0+$/, '');
+    return num.toString();
   };
 
   const handleNumberClick = (value) => {
-    let newDisplay = display;
     if (display === '0' && value !== '.') {
-      newDisplay = value;
-    } else if (value === '.' && display.includes('.')) {
+      setDisplay(value);
+    } else if (display.includes('.') && value === '.') {
       return;
     } else {
-      newDisplay = display + value;
+      setDisplay(display + value);
     }
-    setDisplay(newDisplay);
     setWaitingForSecondOperand(false);
   };
 
@@ -80,15 +73,13 @@ function App() {
 
   const handleToggleSignClick = () => {
     if (display !== '0') {
-      const newValue = (parseFloat(display) * -1).toString();
-      setDisplay(formatDisplay(newValue));
+      setDisplay(formatDisplay((parseFloat(display) * -1).toString()));
     }
   };
 
   const handlePercentClick = () => {
     if (display !== '0') {
-      const newValue = (parseFloat(display) / 100).toString();
-      setDisplay(formatDisplay(newValue));
+      setDisplay(formatDisplay((parseFloat(display) / 100).toString()));
     }
   };
 
